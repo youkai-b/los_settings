@@ -83,6 +83,8 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
     private static final int PRIVATE_DNS_MODE_QUAD9_UNSECURED = 11;
     private static final int PRIVATE_DNS_MODE_QUAD9_ECS = 12;
     private static final int PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS = 13;
+    private static final int PRIVATE_DNS_MODE_TIARAPP = 14;
+    private static final int PRIVATE_DNS_MODE_TIARAPP_ALT = 15;
 
     static {
         PRIVATE_DNS_MAP = new HashMap<>();
@@ -97,6 +99,8 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_QUAD9_UNSECURED, R.id.private_dns_mode_quad9_unsecured);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_QUAD9_ECS, R.id.private_dns_mode_quad9_ecs);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS, R.id.private_dns_mode_quad9_unsecured_ecs);
+        PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_TIARAPP, R.id.private_dns_mode_tiarapp);
+        PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_TIARAPP_ALT, R.id.private_dns_mode_tiarapp_alt);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_OPPORTUNISTIC, R.id.private_dns_mode_opportunistic);
         PRIVATE_DNS_MAP.put(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME, R.id.private_dns_mode_provider);
     }
@@ -189,6 +193,10 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
                     context.getString(R.string.private_dns_hostname_quad9_ecs);
             final String quad9unsecuredecsHostname =
                     context.getString(R.string.private_dns_hostname_quad9_unsecured_ecs);
+            final String tiarappHostname =
+                    context.getString(R.string.private_dns_hostname_tiarapp);
+            final String tiarappaltHostname =
+                    context.getString(R.string.private_dns_hostname_tiarapp_alt);
             if (privateDnsHostname.equals(cloudflareHostname)) {
                 mMode = PRIVATE_DNS_MODE_CLOUDFLARE;
             } else if (privateDnsHostname.equals(cloudflareblockmalwareHostname)) {
@@ -209,6 +217,10 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
                 mMode = PRIVATE_DNS_MODE_QUAD9_ECS;
             } else if (privateDnsHostname.equals(quad9unsecuredecsHostname)) {
                 mMode = PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS;
+            } else if (privateDnsHostname.equals(tiarappHostname)) {
+                mMode = PRIVATE_DNS_MODE_TIARAPP;
+            } else if (privateDnsHostname.equals(tiarappaltHostname)) {
+                mMode = PRIVATE_DNS_MODE_TIARAPP_ALT;
             }
         }
 
@@ -253,6 +265,12 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
         final RadioButton quad9unsecuredecsRadioButton =
                 view.findViewById(R.id.private_dns_mode_quad9_unsecured_ecs);
         quad9unsecuredecsRadioButton.setText(R.string.private_dns_mode_quad9_unsecured_ecs);
+        final RadioButton tiarappRadioButton =
+                view.findViewById(R.id.private_dns_mode_tiarapp);
+        tiarappRadioButton.setText(R.string.private_dns_mode_tiarapp);
+        final RadioButton tiarappaltRadioButton =
+                view.findViewById(R.id.private_dns_mode_tiarapp_alt);
+        tiarappaltRadioButton.setText(R.string.private_dns_mode_tiarapp_alt);
         final RadioButton opportunisticRadioButton =
                 view.findViewById(R.id.private_dns_mode_opportunistic);
         opportunisticRadioButton.setText(
@@ -334,6 +352,16 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
                         context.getString(R.string.private_dns_hostname_quad9_unsecured_ecs);
                 ConnectivitySettingsManager.setPrivateDnsHostname(context, quad9unsecuredecsHostname);
                 modeToSet = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+            } else if (mMode == PRIVATE_DNS_MODE_TIARAPP) {
+                final String tiarappHostname =
+                        context.getString(R.string.private_dns_hostname_tiarapp);
+                ConnectivitySettingsManager.setPrivateDnsHostname(context, tiarappHostname);
+                modeToSet = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
+            } else if (mMode ==  PRIVATE_DNS_MODE_TIARAPP_ALT) {
+                final String tiarappaltHostname =
+                        context.getString(R.string.private_dns_hostname_tiarapp_alt);
+                ConnectivitySettingsManager.setPrivateDnsHostname(context, tiarappaltHostname);
+                modeToSet = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
             }
 
             FeatureFactory.getFeatureFactory().getMetricsFeatureProvider().action(context,
@@ -366,6 +394,10 @@ public class PrivateDnsModeDialogPreference extends CustomDialogPreferenceCompat
             mMode = PRIVATE_DNS_MODE_QUAD9_ECS;
         } else if (checkedId == R.id.private_dns_mode_quad9_unsecured_ecs) {
             mMode = PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS;
+        } else if (checkedId == R.id.private_dns_mode_tiarapp) {
+            mMode = PRIVATE_DNS_MODE_TIARAPP;
+        } else if (checkedId == R.id.private_dns_mode_tiarapp_alt) {
+            mMode = PRIVATE_DNS_MODE_TIARAPP_ALT;
         } else if (checkedId == R.id.private_dns_mode_opportunistic) {
             mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
         } else if (checkedId == R.id.private_dns_mode_provider) {

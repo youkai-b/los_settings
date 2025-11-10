@@ -319,4 +319,16 @@
     <string name="private_dns_mode_quad9_unsecured_ecs" translatable="false">Quad9 Unsecured with ECS DNS</string>
     <!-- Quad9 Unsecured ECS DNS hostname -->
     <string name="private_dns_hostname_quad9_unsecured_ecs" translatable="false">dns12.quad9.net</string>
+
+    <!-- Tiar.app DNS Option -->
+    <string name="private_dns_mode_tiarapp" translatable="false">Tiar.app DNS</string>
+
+    <!-- Tiar.app DNS hostname -->
+    <string name="private_dns_hostname_tiarapp" translatable="false">dot.tiar.app</string>
+
+    <!-- Tiar.app Alternative DNS Option -->
+    <string name="private_dns_mode_tiarapp_alt" translatable="false">Tiar.app DNS Alt</string>
+
+    <!-- Tiar.app Alternative DNS hostname -->
+    <string name="private_dns_hostname_tiarapp_alt" translatable="false">doh.tiar.app</string>
 </resources>

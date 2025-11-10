@@ -76,6 +76,8 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
     private static final int PRIVATE_DNS_MODE_QUAD9_UNSECURED = 11;
     private static final int PRIVATE_DNS_MODE_QUAD9_ECS = 12;
     private static final int PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS = 13;
+    private static final int PRIVATE_DNS_MODE_TIARAPP = 14;
+    private static final int PRIVATE_DNS_MODE_TIARAPP_ALT = 15;
 
     private final Handler mHandler;
     private final ContentObserver mSettingsObserver;
@@ -151,6 +153,8 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
             case PRIVATE_DNS_MODE_QUAD9_UNSECURED:
             case PRIVATE_DNS_MODE_QUAD9_ECS:
             case PRIVATE_DNS_MODE_QUAD9_UNSECURED_ECS:
+            case PRIVATE_DNS_MODE_TIARAPP:
+            case PRIVATE_DNS_MODE_TIARAPP_ALT:
             case PRIVATE_DNS_MODE_OPPORTUNISTIC:
                 return dnsesResolved ? res.getString(R.string.private_dns_mode_on)
                         : res.getString(
@@ -182,6 +186,10 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
                         res.getString(R.string.private_dns_hostname_quad9_ecs);
                 final String quad9unsecuredecsHostname =
                         res.getString(R.string.private_dns_hostname_quad9_unsecured_ecs);
+                final String tiarappHostname =
+                        res.getString(R.string.private_dns_hostname_tiarapp);
+                final String tiarappaltHostname =
+                        res.getString(R.string.private_dns_hostname_tiarapp_alt);
                 if (privateDnsHostname.equals(cloudflareHostname)) {
                     return res.getString(R.string.private_dns_mode_cloudflare);
                 } else if (privateDnsHostname.equals(cloudflareblockmalwareHostname)) {
@@ -202,6 +210,10 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
                     return res.getString(R.string.private_dns_mode_quad9_ecs);
                 } else if (privateDnsHostname.equals(quad9unsecuredecsHostname)) {
                     return res.getString(R.string.private_dns_mode_quad9_unsecured_ecs);
+                } else if (privateDnsHostname.equals(tiarappHostname)) {
+                    return res.getString(R.string.private_dns_mode_tiarapp);
+                } else if (privateDnsHostname.equals(tiarappaltHostname)) {
+                    return res.getString(R.string.private_dns_mode_tiarapp_alt);
                 }
                 return PrivateDnsModeDialogPreference.getHostnameFromSettings(cr);
         }
